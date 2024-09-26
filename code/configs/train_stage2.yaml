@@ -1,0 +1,45 @@
+dataset:
+  train:
+    target: dataset.codeformer_3D.CodeformerDataset
+    params:
+      gt_file: /data1/baihy/denoise/data/ANDI/Gt_fsl_norm/train
+      grad_file: /data1/baihy/results/ADNI/stage1/train_gradients
+      lq_file: /data1/baihy/results/ADNI/stage1/train_combined
+      crop_type: center
+      blur_kernel_size: 41
+      kernel_list: ['iso', 'aniso']
+      kernel_prob: [0.5, 0.5]
+      blur_sigma: [0.1, 12]
+      downsample_range: [1, 12]
+      noise_range: [0, 15]
+      jpeg_range: [30, 100]
+
+  val:
+    target: dataset.codeformer_3D.CodeformerDataset
+    params:
+      gt_file: /data1/baihy/denoise/data/ANDI/Gt_fsl_norm/val
+      grad_file: /data1/baihy/results/ADNI/stage1/val_gradients
+      lq_file: /data1/baihy/results/ADNI/stage1/val_combined
+      crop_type: center
+      blur_kernel_size: 41
+      kernel_list: ['iso', 'aniso']
+      kernel_prob: [0.5, 0.5]
+      blur_sigma: [0.1, 12]
+      downsample_range: [1, 12]
+      noise_range: [0, 15]
+      jpeg_range: [30, 100]
+
+train:
+  exp_dir: stage2
+  learning_rate: 1e-5
+  batch_size: 2
+  num_workers: 1
+  train_steps: 600000
+  log_every: 50
+  ckpt_every: 500
+  image_every: 200
+  val_every: 500
+  cond_resume: /data1/baihy/denoise/condpretrain/checkpoints/0018500.pt
+  gard_resume: 
+  resume: ~
+  
